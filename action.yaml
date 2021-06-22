@@ -1,0 +1,15 @@
+name: "Giess den Kiez Open Data Script"
+description: "Script forwards a SELECT statement to live production DB of GdK"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    PG_SERVER: ${{ inputs.PG_SERVER }}
+    PG_PORT: ${{ inputs.PG_PORT }}
+    PG_USER: ${{ inputs.PG_USER }}
+    PG_PASS: ${{ inputs.PG_PASS }}
+    PG_DB: ${{ inputs.PG_DB }}
+    AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+
