@@ -1,0 +1,5 @@
+geopandas==0.7.0
+numpy==1.20.3
+pandas==1.0.3
+psycopg2==2.8.4
+python-dotenv==0.12.0
