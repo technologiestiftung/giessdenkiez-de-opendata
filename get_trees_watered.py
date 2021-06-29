@@ -24,7 +24,7 @@ def start_db_connection():
     # load database parameters from .env
     load_dotenv()
     # check if all required environmental variables are accessible
-    for env_var in ["PG_DB", "PG_PORT", "PG_USER", "PG_PASS", "PG_DB"]:
+    for env_var in ["PG_DB", "PG_PORT", "PG_USER", "PG_PASS", "PG_SERVER"]:
         if env_var not in os.environ:
             logger.error("❌Environmental Variable {} does not exist".format(env_var))
     # declare variables for database parameters
@@ -35,7 +35,18 @@ def start_db_connection():
     pg_database = os.getenv("PG_DB")
 
     # create databse connection url from variables
-    conn_string ="postgresql://"+pg_username+":"+pg_password+"@"+pg_server+":"+pg_port+"/"+pg_database
+    conn_string = (
+        "postgresql://"
+        + pg_username
+        + ":"
+        + pg_password
+        + "@"
+        + pg_server
+        + ":"
+        + pg_port
+        + "/"
+        + pg_database
+    )
 
     # connect to the database
     conn = create_engine(conn_string)
@@ -63,23 +74,31 @@ def read_db_data(conn):
     """
 
     # create query for selecting the data
-    sql_query = 'SELECT t.id, t.lat, t.lng, t.bezirk, t.artdtsch, t.gattungdeutsch, t.strname, t.pflanzjahr, w.time, w.amount FROM trees_watered AS w JOIN trees_new AS t ON w.tree_id=t.id '
+    sql_query = "SELECT t.id, t.lat, t.lng, t.bezirk, t.artdtsch, t.gattungdeutsch, t.strname, t.pflanzjahr, w.time, w.amount FROM trees_watered AS w JOIN trees_new AS t ON w.tree_id=t.id "
 
     # import data and create dataframe
     df = pd.read_sql_query(sql_query, conn)
     # switch longitude and latitude columns, because they are named wrong
-    df = df.rename(columns={"lat": "lng", "lng": "lat", "amount": "bewaesserungsmenge_in_liter", "time":"zeitpunkt_der_bewaesserung","artdtsch":"baumart","gattungdeutsch":"gattung"})
+    df = df.rename(
+        columns={
+            "lat": "lng",
+            "lng": "lat",
+            "amount": "bewaesserungsmenge_in_liter",
+            "time": "zeitpunkt_der_bewaesserung",
+            "artdtsch": "baumart",
+            "gattungdeutsch": "gattung",
+        }
+    )
     gdf = df.copy()
 
     # save data also in a geodataframe
-    gdf = gpd.GeoDataFrame(
-    gdf, geometry=gpd.points_from_xy(df.lng, df.lat))
+    gdf = gpd.GeoDataFrame(gdf, geometry=gpd.points_from_xy(df.lng, df.lat))
     gdf = gdf.set_crs("EPSG:4326")
 
     return df, gdf
 
 
-def data_to_files(df,gdf):
+def data_to_files(df, gdf):
     """Write data about watered trees and information about trees to csv and geojson files.
 
     Args:
@@ -95,8 +114,16 @@ def data_to_files(df,gdf):
 
     # save as csv file
     df.to_csv(file_path + ".csv", index=False, sep=";")
-    logger.info("Data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp))
+    logger.info(
+        "Data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
+    )
 
     # save as geodataframe
-    gdf.to_file(file_path + ".geojson", driver='GeoJSON')
-    logger.info("Data was written to geojson-file " + file_path + ".geojson" + " at " + str(timestamp))
+    gdf.to_file(file_path + ".geojson", driver="GeoJSON")
+    logger.info(
+        "Data was written to geojson-file "
+        + file_path
+        + ".geojson"
+        + " at "
+        + str(timestamp)
+    )
