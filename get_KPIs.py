@@ -7,6 +7,10 @@ from sqlalchemy import create_engine
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+logger = logging.getLogger("root")
+FORMAT = "[%(levelname)s %(name)s] %(message)s"
+logging.basicConfig(format=FORMAT)
+logger.setLevel(logging.DEBUG)
 
 
 def start_db_connection():
@@ -44,10 +48,12 @@ def start_db_connection():
         + pg_database
     )
 
-    print(conn_string)
+    print(type(conn_string))
 
     # connect to the database
     conn = create_engine(conn_string)
+
+    print("conn: ", type(conn_string))
     try:
         conn.connect()
         logger.info("🗄  Database connection established")
@@ -72,13 +78,15 @@ def read_db_data(conn):
     """
 
     # create query for selecting the data
-    sql_query = "SELECT count(*) AS adoptedTees FROM trees_adopted; \
-        SELECT count(DISTINCT tree_id) AS uniqueAdoptedTrees FROM trees_adopted; \
-        SELECT count(DISTINCT uuid) AS uniqueUsers FROM trees_adopted; \
-        SELECT count(*) AS treesWatered FROM trees_watered; \
-        SELECT count(DISTINCT tree_id) AS uniqueTreesWatered FROM trees_watered; \
-        SELECT count(DISTINCT uuid) AS uniqueWateringUsers FROM trees_watered; \
-        SELECT SUM (amount::INTEGER) AS total from trees_watered;"
+    sql_query = "SELECT COUNT(*) FROM trees_watered;"
+
+    # "SELECT count(*) AS adoptedTees FROM trees_adopted; \
+    #     SELECT count(DISTINCT tree_id) AS uniqueAdoptedTrees FROM trees_adopted; \
+    #     SELECT count(DISTINCT uuid) AS uniqueUsers FROM trees_adopted; \
+    #     SELECT count(*) AS treesWatered FROM trees_watered; \
+    #     SELECT count(DISTINCT tree_id) AS uniqueTreesWatered FROM trees_watered; \
+    #     SELECT count(DISTINCT uuid) AS uniqueWateringUsers FROM trees_watered; \
+    #     SELECT SUM (amount::INTEGER) AS totalWaterAmount from trees_watered;"
 
     # import data and create dataframe
     df = pd.read_sql_query(sql_query, conn)
@@ -116,3 +124,7 @@ def data_to_files(df):
     logger.info(
         "Data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
     )
+
+
+conn = start_db_connection()
+print(read_db_data(conn))
