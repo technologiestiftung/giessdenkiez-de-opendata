@@ -20,8 +20,8 @@ runs:
   using: "docker"
   image: "Dockerfile"
   env:
-    PG_DB: ${{ secrets.PG_DB }}
-    PG_PASS: ${{ secrets.PG_PASS }}
-    PG_PORT: ${{ secrets.PG_PORT }}
-    PG_SERVER: ${{ secrets.PG_SERVER }}
-    PG_USER: ${{ secrets.PG_USER }}
+    PG_DB: ${{ inputs.PG_DB }}
+    PG_PASS: ${{ inputs.PG_PASS }}
+    PG_PORT: ${{ inputs.PG_PORT }}
+    PG_SERVER: ${{ inputs.PG_SERVER }}
+    PG_USER: ${{ inputs.PG_USER }}
