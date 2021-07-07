@@ -10,7 +10,7 @@ on:
 jobs:
   start-docker-container:
     environment: Connections
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     name: A job to start the docker container
     steps:
       - name: get the action
