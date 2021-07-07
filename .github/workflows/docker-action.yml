@@ -16,3 +16,5 @@ jobs:
         uses: actions/checkout@v2
       - name: see env variables
         run: env
+      - name: where am I?
+        run: ls -a
