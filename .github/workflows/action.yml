@@ -15,7 +15,7 @@ jobs:
       - name: get the action
         uses: actions/checkout@v2
       - name: run Python script
-        uses:
+        uses: Dockerfile@v1
         with:
           PG_DB: ${{ secrets.PG_DB }}
           PG_PASS: ${{ secrets.PG_PASS }}
