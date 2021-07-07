@@ -1,4 +1,5 @@
 import logging
+import geopandas as gpd
 import pandas as pd
 from utils.interact_with_db import start_db_connection
 from utils.process_data import export_watering_data, export_kpis
