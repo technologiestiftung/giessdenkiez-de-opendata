@@ -14,11 +14,5 @@ jobs:
     steps:
       - name: get the action
         uses: actions/checkout@v2
-      - name: run Python script
-        uses: Dockerfile@v1
-        with:
-          PG_DB: ${{ secrets.PG_DB }}
-          PG_PASS: ${{ secrets.PG_PASS }}
-          PG_PORT: ${{ secrets.PG_PORT }}
-          PG_SERVER: ${{ secrets.PG_SERVER }}
-          PG_USER: ${{ secrets.PG_USER }}
+      - name: see env variables
+        run: env
