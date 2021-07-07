@@ -18,3 +18,11 @@ jobs:
         run: env
       - name: where am I?
         run: ls -a
+      - name: Python action
+        uses: ./
+        with:
+          PG_SERVER: ${{ secrets.PG_SERVER }}
+          PG_PORT: ${{ secrets.PG_PORT }}
+          PG_USER: ${{ secrets.PG_USER }}
+          PG_PASS: ${{ secrets.PG_PASS }}
+          PG_DB: ${{ secrets.PG_DB }}
