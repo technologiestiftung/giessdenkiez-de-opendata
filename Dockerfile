@@ -1,5 +1,5 @@
-# use Python version 3.8.10
-FROM python:3.8.10-alpine3.13
+# use Python version 3.8
+FROM python:3.8-slim
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
