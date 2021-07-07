@@ -13,6 +13,9 @@ FROM base as builder
 COPY requirements.txt /app/
 RUN cd /app/ && python -m pip install --no-warn-script-location --prefix=/install -r requirements.txt
 
+FROM base as app
+COPY --from=builder /install /usr/local
+
 COPY . /app/
 
 # run script
