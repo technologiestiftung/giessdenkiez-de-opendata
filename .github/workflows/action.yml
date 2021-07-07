@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: start docker
         id: start
-        uses: ./
+        uses: actions/checkout@v2
         with:
           PG_DB: ${{ secrets.PG_DB }}
           PG_PASS: ${{ secrets.PG_PASS }}
