@@ -20,6 +20,7 @@ jobs:
         run: ls -a
       - name: Python action
         uses: ./
+        id: scraper
         with:
           PG_SERVER: ${{ secrets.PG_SERVER }}
           PG_PORT: ${{ secrets.PG_PORT }}
