@@ -23,4 +23,4 @@ urllib3==1.25.8
 zope.interface==5.0.1
 requests==2.25.1
 sqlalchemy==1.4.3
-psycopg2==2.8.4
+psycopg2-binary==2.8.4
