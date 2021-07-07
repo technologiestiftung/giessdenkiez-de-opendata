@@ -11,7 +11,9 @@ ENV PYTHONUNBUFFERED 1
 COPY requirements.txt /app/
 RUN cd /app/ && python -m pip install --no-warn-script-location --prefix=/install -r requirements.txt
 
-RUN pip freeze 
+COPY . /app/
+
+CMD ["pip", "freeze"]
 
 # run script
 CMD ["python", "/app/main.py"]
