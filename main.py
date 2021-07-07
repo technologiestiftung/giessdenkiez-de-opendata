@@ -29,3 +29,5 @@ sql_query_water = "SELECT count(*) AS treesWatered, count(DISTINCT tree_id) AS u
 df_water = pd.read_sql_query(sql_query_water, conn)
 
 export_KPIs(df_adopt,df_water)
+
+logger.info("Writting of GdK Open Data was successfull. End of script.")

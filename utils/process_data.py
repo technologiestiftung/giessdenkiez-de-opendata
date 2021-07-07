@@ -47,13 +47,13 @@ def export_watering_data(df_watering):
     # save as csv file
     df.to_csv(file_path + ".csv", index=False, sep=";")
     logger.info(
-        "Data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
+        "Watering data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
     )
 
     # save as geodataframe
     gdf.to_file(file_path + ".geojson", driver="GeoJSON")
     logger.info(
-        "Data was written to geojson-file "
+        "Watering data was written to geojson-file "
         + file_path
         + ".geojson"
         + " at "
@@ -81,4 +81,4 @@ def export_KPIs(df_adopt, df_water):
 
     # open csv in append mode 'a' to add dataframe to existing csv file
     result.to_csv("daten/giessdenkiezKPIs.csv", mode="a", index=False, header=False)
-    logger.info("Data was written to csv-file: daten/giessdenkiez_KPIs.csv")
+    logger.info("KPI data was added to existing csv-file: daten/giessdenkiez_KPIs.csv")
