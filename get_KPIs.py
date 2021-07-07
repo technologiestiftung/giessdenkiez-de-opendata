@@ -1,8 +1,10 @@
 import logging
+import csv
 from datetime import datetime
 import os
 from dotenv import load_dotenv
 import pandas as pd
+from pandas.core.frame import DataFrame
 from sqlalchemy import create_engine
 
 logger = logging.getLogger(__name__)
@@ -11,6 +13,8 @@ logger = logging.getLogger("root")
 FORMAT = "[%(levelname)s %(name)s] %(message)s"
 logging.basicConfig(format=FORMAT)
 logger.setLevel(logging.DEBUG)
+
+existing_df = pd.read_csv("daten/giessdenkiezKPIs.csv", sep=",")
 
 
 def start_db_connection():
@@ -47,13 +51,9 @@ def start_db_connection():
         + "/"
         + pg_database
     )
-
-    print(type(conn_string))
-
     # connect to the database
     conn = create_engine(conn_string)
 
-    print("conn: ", type(conn_string))
     try:
         conn.connect()
         logger.info("🗄  Database connection established")
@@ -78,36 +78,21 @@ def read_db_data(conn):
     """
 
     # create query for selecting the data
-    sql_query = "SELECT COUNT(*) FROM trees_watered;"
+    sql_query_adopt = "SELECT count(*) AS adoptedTrees, count(DISTINCT tree_id) AS uniqueAdoptedTrees, count(DISTINCT uuid) AS uniqueUsers FROM trees_adopted;"
+    sql_query_water = "SELECT count(*) AS treesWatered, count(DISTINCT tree_id) AS uniqueTreesWatered, count(DISTINCT uuid) AS uniqueWateringUsers, SUM(amount::INTEGER) AS totalWaterAmount FROM trees_watered;"
 
-    # "SELECT count(*) AS adoptedTees FROM trees_adopted; \
-    #     SELECT count(DISTINCT tree_id) AS uniqueAdoptedTrees FROM trees_adopted; \
-    #     SELECT count(DISTINCT uuid) AS uniqueUsers FROM trees_adopted; \
-    #     SELECT count(*) AS treesWatered FROM trees_watered; \
-    #     SELECT count(DISTINCT tree_id) AS uniqueTreesWatered FROM trees_watered; \
-    #     SELECT count(DISTINCT uuid) AS uniqueWateringUsers FROM trees_watered; \
-    #     SELECT SUM (amount::INTEGER) AS totalWaterAmount from trees_watered;"
+    df_adopt = pd.read_sql_query(sql_query_adopt, conn)
+    df_water = pd.read_sql_query(sql_query_water, conn)
 
-    # import data and create dataframe
-    df = pd.read_sql_query(sql_query, conn)
+    # create dataframe from sql values
+    result = df_adopt.join(df_water)
+    timestamp = datetime.now().date()
+    result["datestamp"] = timestamp
 
-    print(df)
-
-    # switch longitude and latitude columns, because they are named wrong
-    # df = df.rename(
-    #     columns={
-    #         "lat": "lng",
-    #         "lng": "lat",
-    #         "amount": "bewaesserungsmenge_in_liter",
-    #         "time": "zeitpunkt_der_bewaesserung",
-    #         "artdtsch": "baumart",
-    #         "gattungdeutsch": "gattung",
-    #     }
-    # )
-    return df
+    return result
 
 
-def data_to_files(df):
+def data_to_files(result):
     """Write data about watered trees and information about trees to csv and geojson files.
 
     Args:
@@ -115,16 +100,11 @@ def data_to_files(df):
         watered_trees_gdf: (GeoDataFrame): Watering and tree data that is currently stored in the database with geometry.
     """
 
-    # set path were files should be written  to
-    file_path = "daten/giessdenkiez_KPIs"
-    timestamp = datetime.now()
-
-    # save as csv file
-    df.to_csv(file_path + ".csv", index=False, sep=";")
-    logger.info(
-        "Data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
-    )
+    # open csv in append mode 'a' to add dataframe to existing csv file
+    result.to_csv("daten/giessdenkiezKPIs.csv", mode="a", index=False, header=False)
+    logger.info("Data was written to csv-file: daten/giessdenkiez_KPIs.csv")
 
 
 conn = start_db_connection()
-print(read_db_data(conn))
+result = read_db_data(conn)
+data_to_files(result)
