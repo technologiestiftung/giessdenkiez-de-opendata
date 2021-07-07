@@ -17,7 +17,7 @@ logger.info("Starting script: GdK Open Data")
 conn = start_db_connection()
 
 # Get watering data from DB and write to files
-sql_query = "SELECT t.id, t.lat, t.lng, t.bezirk, t.artdtsch, t.gattungdeutsch, t.strname, t.pflanzjahr, w.time, w.amount FROM trees_watered AS w JOIN trees_new AS t ON w.tree_id=t.id "
+sql_query = "SELECT t.id, t.lat, t.lng, t.bezirk, t.artdtsch, t.gattungdeutsch, t.strname, t.pflanzjahr, w.time, w.amount FROM trees_watered AS w JOIN trees AS t ON w.tree_id=t.id "
 df_watering = pd.read_sql_query(sql_query, conn)
 
 export_watering_data(df_watering)
