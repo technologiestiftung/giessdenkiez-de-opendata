@@ -8,6 +8,16 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
+class MyError(Exception):
+    pass
+
+
+class ConfigurationError(MyError):
+    """Configuration Error"""
+
+    pass
+
+
 def start_db_connection():
     """Loads database parameters from a .env-file and concects to the database.
 
@@ -55,7 +65,7 @@ def start_db_connection():
 
         return conn
     # stop script if connection to database was not succesfull
-    except:
+    except ConfigurationError:
         msg = f"❌ Could not establish a database connection to {conn_string}"
         logger.error(msg)
-        raise Exception(msg)
+        raise ConfigurationError(msg)

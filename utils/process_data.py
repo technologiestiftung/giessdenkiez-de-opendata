@@ -14,7 +14,7 @@ def export_watering_data(df_watering):
         watered_trees_df: (DataFrame): Watering and tree data that is currently stored in the database.
         watered_trees_gdf: (GeoDataFrame): Watering and tree data that is currently stored in the database with geometry.
 
-    Output: 
+    Output:
         daten/giessdenkiez_bewässerungsdaten.csv
         daten/giessdenkiez_bewässerungsdaten.geojson
     """
@@ -23,19 +23,18 @@ def export_watering_data(df_watering):
     file_path = "daten/giessdenkiez_bewässerungsdaten"
 
     timestamp = datetime.now()
-    day = str(timestamp.strftime("%d-%m-%y"))
 
     # prepare data
     # switch longitude and latitude columns, because they are named wrong
     df = df_watering.rename(
-    columns={
-        "lat": "lng",
-        "lng": "lat",
-        "amount": "bewaesserungsmenge_in_liter",
-        "time": "zeitpunkt_der_bewaesserung",
-        "artdtsch": "baumart",
-        "gattungdeutsch": "gattung",
-    }
+        columns={
+            "lat": "lng",
+            "lng": "lat",
+            "amount": "bewaesserungsmenge_in_liter",
+            "time": "zeitpunkt_der_bewaesserung",
+            "artdtsch": "baumart",
+            "gattungdeutsch": "gattung",
+        }
     )
     gdf = df.copy()
 
@@ -46,7 +45,11 @@ def export_watering_data(df_watering):
     # save as csv file
     df.to_csv(file_path + ".csv", index=False, sep=";")
     logger.info(
-        "Watering data was written to csv-file " + file_path + ".csv" + " at " + str(timestamp)
+        "Watering data was written to csv-file "
+        + file_path
+        + ".csv"
+        + " at "
+        + str(timestamp)
     )
 
     # save as geodataframe
@@ -59,25 +62,22 @@ def export_watering_data(df_watering):
         + str(timestamp)
     )
 
-def export_KPIs(df_adopt, df_water):
+
+def export_kpis(df_adopt, df_water):
     """Add KPIs to existing csv file.
 
     Args:
         df_adopt: (DataFrame): KPIs about watered trees
         df_water: (DataFrame): KPIs about adoptes trees
 
-    Output: 
+    Output:
         daten/giessdenkiez_KPIs.csv
     """
-
-    # get existing df
-    existing_df = pd.read_csv("daten/giessdenkiezKPIs.csv", sep=",")
-
     # preprocess data
     result = df_adopt.join(df_water)
     timestamp = datetime.now().date()
     result["datestamp"] = timestamp
 
-    # open csv in append mode 'a' to add dataframe to existing csv file
+    # open existing csv in append mode 'a' to add dataframe to existing csv file
     result.to_csv("daten/giessdenkiezKPIs.csv", mode="a", index=False, header=False)
     logger.info("KPI data was added to existing csv-file: daten/giessdenkiez_KPIs.csv")
