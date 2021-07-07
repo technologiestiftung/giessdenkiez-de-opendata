@@ -39,7 +39,7 @@ def export_watering_data(df_watering):
     gdf = df.copy()
 
     # save data also in a geodataframe
-    gdf = gpd.GeoDataFrame(gdf, geometry=gpd.points_from_xy(df.lng, df.lat))
+    gdf = gpd.GeoDataFrame(gdf, geometry=gpd.points_from_xy(float(df.lng), float(df.lat)))
     gdf = gdf.set_crs("EPSG:4326")
 
     # save as csv file
