@@ -12,9 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to start the docker container
     steps:
-      - name: start docker
-        id: start
+      - name: get the action
         uses: actions/checkout@v2
+      - name: run Python script
+        uses: ./
         with:
           PG_DB: ${{ secrets.PG_DB }}
           PG_PASS: ${{ secrets.PG_PASS }}
