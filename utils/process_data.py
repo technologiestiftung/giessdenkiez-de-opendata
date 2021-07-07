@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 import pandas as pd
 import geopandas as gpd
-from sqlalchemy import create_engine
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
