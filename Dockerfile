@@ -1,5 +1,5 @@
 # use Python version 3.8
-FROM python:3.8.1-slim-buster as base
+FROM python:3.6.14-slim-buster as base
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
