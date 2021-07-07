@@ -1,8 +1,7 @@
 import logging
 import pandas as pd
 from utils.interact_with_db import start_db_connection
-from utils.get_watering_data import export_watering_data
-from utils.get_KPIs import export_KPIs
+from utils.process_data import export_watering_data, export_KPIs
 
 # logger configuration
 logger = logging.getLogger('root')
