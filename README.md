@@ -1,6 +1,6 @@
 # Gieß-den-Kiez Open Data
-*This repos purpose is to run a GitHub action to automatically generate open datasets from *GdK-Nutzungsdaten*
-The datasets are published at [Open Data Portal Berlin](https://daten.berlin.de/datensaetze.*
+*This repos purpose is to run a GitHub action to automatically generate open datasets about the usage of the Gieß-den-Kiez website.
+The datasets are published at [Open Data Portal Berlin](https://daten.berlin.de/datensaetze).*
 
 ### Beschreibung
 
