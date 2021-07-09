@@ -28,3 +28,9 @@ jobs:
           PG_USER: ${{ secrets.PG_USER }}
           PG_PASS: ${{ secrets.PG_PASS }}
           PG_DB: ${{ secrets.PG_DB }}
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v7.2.0
+        with:
+          add: daten
+          author_name: tsboter
+          author_email: roboter@tsb-berlin.de
