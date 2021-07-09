@@ -1,5 +1,5 @@
 # Gieß-den-Kiez Open Data
-*This repos purpose is to run a GitHub action to automatically generate open datasets about the usage of the Gieß-den-Kiez website. The action executes a python script that makes a request to the database on the first day of every monthly.
+*This repos purpose is to run a GitHub action to automatically generate open datasets about the usage of the Gieß-den-Kiez website. The action executes a python script that makes a request to the database on the first day of every month.
 The datasets generated on this way are located in the daten-folder and the metadata is published at [Open Data Portal Berlin](https://daten.berlin.de/datensaetze).*
 
 ### Beschreibung
