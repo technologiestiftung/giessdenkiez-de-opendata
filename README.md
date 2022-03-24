@@ -1,4 +1,6 @@
-# Gieß-den-Kiez Open Data
+![](https://img.shields.io/badge/Build%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiesitftung%20Berlin-blue)
+
+# Gieß den Kiez Open Data
 *This repos purpose is to run a GitHub action to automatically generate open datasets about the usage of the Gieß-den-Kiez website. The action executes a python script that makes a request to the database on the first day of every month.
 The datasets generated on this way are located in the daten-folder and the metadata is published at [Open Data Portal Berlin](https://daten.berlin.de/datensaetze).*
 
