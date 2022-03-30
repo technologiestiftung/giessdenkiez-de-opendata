@@ -12,3 +12,16 @@ Here you can find data about the usage of the giessdenkiez.de website. These are
 
 All tree points visualised in the app come from the official [tree dataset of the city of Berlin](https://daten.berlin.de/datensaetze/baumbestand-berlin-straßenbäume-wfs). This dataset is published annually in the Open Data Portal by the responsible office, the Green Space Information System (GRIS), based on the surveys of the twelve district green space offices, and uniquely identifies each tree via the unique ID's "Technischer Schlüssel". The data published here has this same ID as a key attribute, so that the trees of Gieß-den-Kiez can be clearly assigned to the trees in the tree dataset in order to obtain more information about the trees.
 
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
