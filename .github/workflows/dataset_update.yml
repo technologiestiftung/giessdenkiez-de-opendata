@@ -2,7 +2,7 @@ name: Datenregister Dataset Update
 on:
   push:
     paths:
-      - 'data/**'
+      - 'daten/**'
 env:
   CKAN_TOKEN: ${{secrets.CKAN_TOKEN}}
 jobs:
