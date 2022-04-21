@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt
       - name: Run Updater
         run: |
-          make dataset-update
+          python bin/custom_updater.py
