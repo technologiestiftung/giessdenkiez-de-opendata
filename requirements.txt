@@ -24,3 +24,5 @@ zope.interface==5.0.1
 requests==2.25.1
 sqlalchemy==1.4.3
 psycopg2-binary==2.8.4
+j2cli
+git+https://github.com/berlinonline/ckan_metadata_updater
