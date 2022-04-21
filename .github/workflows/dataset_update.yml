@@ -22,5 +22,4 @@ jobs:
           pip install -r requirements.txt
       - name: Run Updater
         run: |
-          ls
           make dataset-update
