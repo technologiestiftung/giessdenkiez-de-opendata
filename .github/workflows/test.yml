@@ -27,7 +27,7 @@ jobs:
           POSTGRES_USER: fangorn
           POSTGRES_DB: trees
         volumes:
-          - ./.devcontainer/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+          - ./.devcontainer/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
