@@ -23,4 +23,4 @@ jobs:
       - name: Run Updater
         run: |
           ls
-          python bin/custom_updater.py
+          make dataset-update
