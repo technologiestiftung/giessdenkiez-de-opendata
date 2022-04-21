@@ -1,13 +1,12 @@
 import logging
 from datetime import datetime
-import pandas as pd
 import geopandas as gpd
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-def export_watering_data(df_watering):
+def export_watering_data(df_watering, file_path="daten/giessdenkiez_bewässerungsdaten"):
     """Write data about watered trees and information about trees to csv and geojson files.
 
     Args:
@@ -18,10 +17,6 @@ def export_watering_data(df_watering):
         daten/giessdenkiez_bewässerungsdaten.csv
         daten/giessdenkiez_bewässerungsdaten.geojson
     """
-
-    # set path were files should be written  to
-    file_path = "daten/giessdenkiez_bewässerungsdaten"
-
     timestamp = datetime.now()
 
     # prepare data
@@ -39,7 +34,8 @@ def export_watering_data(df_watering):
     gdf = df.copy()
 
     # save data also in a geodataframe
-    gdf = gpd.GeoDataFrame(gdf, geometry=gpd.points_from_xy(df.lng.astype(float), df.lat.astype(float)))
+    gdf = gpd.GeoDataFrame(gdf, geometry=gpd.points_from_xy(
+        df.lng.astype(float), df.lat.astype(float)))
     gdf = gdf.set_crs("EPSG:4326")
 
     # save as csv file
@@ -79,5 +75,7 @@ def export_kpis(df_adopt, df_water):
     result["datestamp"] = timestamp
 
     # open existing csv in append mode 'a' to add dataframe to existing csv file
-    result.to_csv("daten/giessdenkiezKPIs.csv", mode="a", index=False, header=False)
-    logger.info("KPI data was added to existing csv-file: daten/giessdenkiez_KPIs.csv")
+    result.to_csv("daten/giessdenkiezKPIs.csv",
+                  mode="a", index=False, header=False)
+    logger.info(
+        "KPI data was added to existing csv-file: daten/giessdenkiez_KPIs.csv")
