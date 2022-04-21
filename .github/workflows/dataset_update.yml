@@ -22,5 +22,5 @@ jobs:
           pip install -r requirements.txt
       - name: Run Updater
         run: |
-          cd
+          ls
           python bin/custom_updater.py
