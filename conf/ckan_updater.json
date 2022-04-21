@@ -1,0 +1,13 @@
+{
+    "dataset": {
+      "id": "b7c80f59-8e55-4126-913f-772014ebef48",
+      "title": "Titel des Datensatzes",
+      "notes": "Hier sollte eine Beschreibung des Datensatzes stehen.",
+      "author": "TSB",
+      "license_id": "cc-zero",
+      "berlin_source": "api-gitaction"
+    },
+    "connection": {
+      "ckan_base": "https://datenregister.stage.berlinonline.net"
+    }
+  }
