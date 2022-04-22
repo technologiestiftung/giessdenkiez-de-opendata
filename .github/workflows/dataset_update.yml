@@ -1,6 +1,8 @@
 name: Datenregister Dataset Update
 on:
   push:
+    branches:
+    - main
     paths:
       - 'daten/giessdenkiezKPIs.csv'
       - 'daten/giessdenkiez_bewässerungsdaten.csv'
