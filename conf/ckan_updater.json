@@ -1,13 +1,13 @@
 {
     "dataset": {
-      "id": "b7c80f59-8e55-4126-913f-772014ebef48",
-      "title": "Titel des Datensatzes",
-      "notes": "Hier sollte eine Beschreibung des Datensatzes stehen.",
-      "author": "TSB",
+      "id": "gdk-nutzungsdaten",
+      "title": "Gieß den Kiez - Nutzungsdaten",
+      "notes": "Gieß den Kiez ist ein Projekt des CityLAB Berlin das die Berliner Stadtbäume vor dem Vertrocknen schützen soll. Auf einer Karte werden dabei über 625.000 Straßen- und Anlagenbäume Berlins visualisiert. Mit Hilfe der Web-App können auf www.giessdenkiez.de Bäume erkundet, adoptiert und bewässert werden, sodass die Koordinierung der Bewässerungsleistungen der Stadtgesellschaft protokolliert und verbessert wird.\r\n\r\nHier finden Sie Daten zur Nutzung der Webseite giessdenkiez.de. Das sind zum einen die KPI's (Key-Performance-Indicators) wie z.B. Anzahl der Nutzer*innen, Anzahl der adoptierten Bäume und weitere, aber auch Daten zu allen über die Webseite erfassten Bewässerungen. Während der Vegetationsperiode (01.03. bis 30.09.) werden die Daten regelmäßig zu Beginn eines Monats aktualisiert. Gieß den Kiez ist Ende Mai 2020 online gegangen.\r\n\r\nAlle in der App visualisierten Baumpunkte stammen aus dem offiziellen Baumkataster der Stadt Berlin (https://daten.berlin.de/datensaetze/baumbestand-berlin-straßenbäume-wfs). Das Baumkataster wird durch die zuständige Geschäftststelle, dem Grünflächeninformationssystem (GRIS), jährlich auf Basis der Erhebungen der zwölf bezirklichen Grünflächenämter im Open Data Portal veröffentlicht und identifiziert jeden Baum eindeutig über den Technischen Schlüssel. Die hier veröffentlichen Daten besitzen als Schlüsselattribut eben diese ID, sodass die in Gieß den Kiez gegossenen Bäume eindeutig den Bäumen des Baumkataster zugeordnet werden können, um mehr Informationen über die Bäume zu erhalten.",
+      "author": "Open Data Informationsstelle",
       "license_id": "cc-zero",
       "berlin_source": "api-gitaction"
     },
     "connection": {
-      "ckan_base": "https://datenregister.stage.berlinonline.net"
+      "ckan_base": "https://datenregister.berlin.de"
     }
   }

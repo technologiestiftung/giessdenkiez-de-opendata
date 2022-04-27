@@ -1,8 +1,13 @@
 name: Datenregister Dataset Update
 on:
   push:
+    branches:
+    - main
     paths:
-      - 'data/**'
+      - 'daten/giessdenkiezKPIs.csv'
+      - 'daten/giessdenkiez_bewässerungsdaten.csv'
+      - 'daten/giessdenkiez_bewässerungsdaten.geojson'
+      - 'daten/test.csv'
 env:
   CKAN_TOKEN: ${{secrets.CKAN_TOKEN}}
 jobs:
