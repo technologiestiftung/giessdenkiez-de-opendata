@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run postgres db
-        run: docker-compose --env-file .env.example --file .devcontainer/docker-compose.yml up db --detach --build --force-recreate
+        run: docker-compose --env-file .env.sample --file .devcontainer/docker-compose.yml up db --detach --build --force-recreate
       - run: npm ci
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
