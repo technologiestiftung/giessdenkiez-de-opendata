@@ -25,6 +25,7 @@ jobs:
       - name: Install Requirements
         run: |
           pip install -r requirements.txt
+          pip install git+https://github.com/berlinonline/ckan_metadata_updater
       - name: Run Updater
         run: |
           make dataset-update
