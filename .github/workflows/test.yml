@@ -1,0 +1,58 @@
+name: Project Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+  PG_SERVER: localhost
+  PG_PORT: 5432
+  PG_USER: fangorn
+  PG_PASS: ent
+  PG_DB: trees
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # services:
+    #   # Label used to access the service container
+    #   postgres:
+    #     # Docker Hub image
+    #     image: postgres
+    #     # Provide the password for postgres
+    #     env:
+    #       POSTGRES_PASSWORD: ent
+    #       POSTGRES_USER: fangorn
+    #       POSTGRES_DB: trees
+    #     volumes:
+    #       - ./.devcontainer/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d
+    #     # Set health checks to wait until postgres has started
+    #     options: >-
+    #       --health-cmd pg_isready
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+    #     ports:
+    #       # Maps tcp port 5432 on service container to the host
+    #       - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run postgres db
+        run: docker-compose --env-file .env.sample --file .devcontainer/docker-compose.yml up --detach --build --force-recreate db
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install system libraries
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo apt-get update && sudo apt-get -y install --no-install-recommends gdal-bin libgdal-dev
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with pytest
+        run: pytest -vv
