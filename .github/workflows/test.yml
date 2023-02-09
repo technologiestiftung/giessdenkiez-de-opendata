@@ -1,0 +1,23 @@
+name: "TEST: Giess den Kiez Open Data Script"
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  start-docker-container:
+    environment: Connections
+    runs-on: ubuntu-latest
+    name: A job to start the docker container
+    steps:
+      - name: get the action
+        uses: actions/checkout@v2
+      - name: Python action
+        uses: ./
+        id: scraper
+        with:
+          PG_SERVER: ${{ secrets.PG_SERVER }}
+          PG_PORT: ${{ secrets.PG_PORT }}
+          PG_USER: ${{ secrets.PG_USER }}
+          PG_PASS: ${{ secrets.PG_PASS }}
+          PG_DB: ${{ secrets.PG_DB }}
