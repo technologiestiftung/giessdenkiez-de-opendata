@@ -2,12 +2,12 @@ name: Datenregister Dataset Update
 on:
   push:
     branches:
-    - main
+      - main
     paths:
-      - 'daten/giessdenkiezKPIs.csv'
-      - 'daten/giessdenkiez_bewässerungsdaten.csv'
-      - 'daten/giessdenkiez_bewässerungsdaten.geojson'
-      - 'daten/test.csv'
+      - "daten/giessdenkiezKPIs.csv"
+      - "daten/giessdenkiez_bewässerungsdaten.csv"
+      - "daten/giessdenkiez_bewässerungsdaten.geojson"
+      - "daten/test.csv"
 env:
   CKAN_TOKEN: ${{secrets.CKAN_TOKEN}}
 jobs:
@@ -21,7 +21,7 @@ jobs:
           curl https://api.github.com/repos/$GITHUB_REPOSITORY \
             | jq --exit-status '.is_template == false'
       # check out this repo
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Install Requirements
         run: |
           pip install -r requirements.txt
