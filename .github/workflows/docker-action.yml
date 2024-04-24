@@ -2,17 +2,17 @@ name: "Giess den Kiez Open Data Script"
 
 on:
   #push:
-   # branches:
-   #   - main
+  # branches:
+  #   - main
   workflow_dispatch:
   schedule:
-  - cron: '0 0 1 * *'
+    - cron: "0 0 1 * *"
   repository_dispatch:
     types: [cron]
 jobs:
   start-docker-container:
     environment: Connections
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: A job to start the docker container
     steps:
       - name: get the action
