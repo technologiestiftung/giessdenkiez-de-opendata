@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+    workflow_dispatch:
     paths:
       - "daten/giessdenkiezKPIs.csv"
       - "daten/giessdenkiez_bewässerungsdaten.csv"
